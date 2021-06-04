@@ -1,2 +1,3 @@
 # DB_backend
-Database principle and application course project
+Database Principle and Application Course Project | Tongji University
+---
