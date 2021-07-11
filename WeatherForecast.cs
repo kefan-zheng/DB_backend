@@ -1,6 +1,6 @@
 using System;
 
-namespace LvDao_Tourism_Info_management_system_
+namespace LvDao
 {
     public class WeatherForecast
     {

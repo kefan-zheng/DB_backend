@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LvDao_Tourism_Info_management_system_
+namespace LvDao
 {
     public class Startup
     {
@@ -30,7 +30,7 @@ namespace LvDao_Tourism_Info_management_system_
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LvDao_Tourism_Info_management_system_", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LvDao", Version = "v1" });
             });
         }
 
@@ -41,7 +41,7 @@ namespace LvDao_Tourism_Info_management_system_
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LvDao_Tourism_Info_management_system_ v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LvDao v1"));
             }
 
             app.UseHttpsRedirection();

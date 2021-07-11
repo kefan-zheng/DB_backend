@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>LvDao_Tourism_Info_management_system_</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

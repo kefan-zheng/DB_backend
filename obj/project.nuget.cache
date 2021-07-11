@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GmO+DpuIsAJZlzKLXiD4yvK/gh4wUWYjGiw9wCnqbVI20IxlHmXCPrpV0yDHAx0+AZnX1BiQRrYQu2gGzFdI7Q==",
+  "dgSpecHash": "vK+r0lliGuLRTA0YelrbkvxszBPFjrA+HEShfLK8PWK2FipQlQ4EHBEqlQznSiRplJNEw07rc90X5HbO9WORTg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\20973\\Desktop\\LvDao(Tourism_Info_management_system)\\LvDao(Tourism_Info_management_system).csproj",
+  "projectFilePath": "C:\\Users\\20973\\Desktop\\LvDao\\LvDao.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\20973\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\20973\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

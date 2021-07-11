@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LvDao_Tourism_Info_management_system_.Controllers
+namespace LvDao.Controllers
 {
     [ApiController]
     [Route("[controller]")]

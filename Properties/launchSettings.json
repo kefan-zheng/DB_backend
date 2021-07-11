@@ -4,8 +4,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:41496",
-      "sslPort": 44362
+      "applicationUrl": "http://localhost:30859",
+      "sslPort": 44345
     }
   },
   "profiles": {
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "LvDao_Tourism_Info_management_system_": {
+    "LvDao": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

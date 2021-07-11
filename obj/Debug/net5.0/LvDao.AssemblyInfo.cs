@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("LvDao(Tourism_Info_management_system)")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("LvDao")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("LvDao(Tourism_Info_management_system)")]
-[assembly: System.Reflection.AssemblyTitleAttribute("LvDao(Tourism_Info_management_system)")]
+[assembly: System.Reflection.AssemblyProductAttribute("LvDao")]
+[assembly: System.Reflection.AssemblyTitleAttribute("LvDao")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // 由 MSBuild WriteCodeFragment 类生成。
