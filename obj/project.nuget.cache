@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "rWitn2fwPwtA+lZJI8N/GX/TG7tP/5KGPgCv6E7cpilyZPnlwn/c6MrNdfUJZP77kryA3K8Ei+j4pTzI+cJZWA==",
+  "dgSpecHash": "GmO+DpuIsAJZlzKLXiD4yvK/gh4wUWYjGiw9wCnqbVI20IxlHmXCPrpV0yDHAx0+AZnX1BiQRrYQu2gGzFdI7Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\20973\\Desktop\\LvDao(Tourism_Info_management_system)\\LvDao(Tourism_Info_management_system).csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\20973\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\20973\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\20973\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\20973\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\20973\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\20973\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
   "logs": []
 }

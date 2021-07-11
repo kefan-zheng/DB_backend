@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LvDao(Tourism_Info_management_system)", "LvDao(Tourism_Info_management_system).csproj", "{F6ED1B7E-1F31-4D68-B2C9-AB1DE7CB93AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LvDao(Tourism_Info_management_system)", "LvDao(Tourism_Info_management_system).csproj", "{8B15424E-2A15-4267-843A-19BAC5877BD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F6ED1B7E-1F31-4D68-B2C9-AB1DE7CB93AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6ED1B7E-1F31-4D68-B2C9-AB1DE7CB93AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6ED1B7E-1F31-4D68-B2C9-AB1DE7CB93AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6ED1B7E-1F31-4D68-B2C9-AB1DE7CB93AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B15424E-2A15-4267-843A-19BAC5877BD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B15424E-2A15-4267-843A-19BAC5877BD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B15424E-2A15-4267-843A-19BAC5877BD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B15424E-2A15-4267-843A-19BAC5877BD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {79E35C83-9090-4252-B0E4-43A88F6E0723}
+		SolutionGuid = {53A483EF-42E3-4EAB-B37D-EDAFEA381053}
 	EndGlobalSection
 EndGlobal
