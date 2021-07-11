@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LvDao_Tourism_Info_Management_System
+namespace LvDao_Tourism_Info_management_system_
 {
     public class Program
     {
