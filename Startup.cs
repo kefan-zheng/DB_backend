@@ -28,7 +28,7 @@ namespace LvDao
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
+            services.AddSwaggerGen();
             //添加cors 服务 配置跨域处理            
             services.AddCors(options =>
             {
@@ -51,6 +51,11 @@ namespace LvDao
                 //app.UseSwagger();
                 //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LvDao v1"));
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "LvDao's API Documents");
+            });
 
             app.UseHttpsRedirection();
 

@@ -9085,25 +9085,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\同济曹峰源\\.nuget\\packages\\": {},
+    "C:\\Users\\20973\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\同济曹峰源\\Desktop\\DB_backend\\LvDao.csproj",
+      "projectUniqueName": "C:\\Users\\20973\\Desktop\\LvDao.beta\\LvDao.csproj",
       "projectName": "LvDao",
-      "projectPath": "C:\\Users\\同济曹峰源\\Desktop\\DB_backend\\LvDao.csproj",
-      "packagesPath": "C:\\Users\\同济曹峰源\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\同济曹峰源\\Desktop\\DB_backend\\obj\\",
+      "projectPath": "C:\\Users\\20973\\Desktop\\LvDao.beta\\LvDao.csproj",
+      "packagesPath": "C:\\Users\\20973\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\20973\\Desktop\\LvDao.beta\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\同济曹峰源\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\20973\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
