@@ -97,12 +97,12 @@ namespace LvDao.Controllers
         {
             SqlSugar c = new();
             var db = c.GetInstance();
-            var res = await db.Queryable<LD_USER>().Where(it => it.USER_ID == id).ToListAsync();
+            var res = await db.Queryable<LD_FAQS>().Where(it => it.QUESTION_ID == id).ToListAsync();
             if (res == null)
             {
                 return NotFound();
             }
-            await Task.Run(() => db.Deleteable<LD_USER>().In(id).ExecuteCommand());
+            await Task.Run(() => db.Deleteable<LD_FAQS>().In(id).ExecuteCommand());
             return NoContent();
         }
     }
