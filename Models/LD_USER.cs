@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqlSugar;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ namespace LvDao.Models
 {
     public class LD_USER
     {
+        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public string USER_ID { get; set; }
         public string USER_Name { get; set; }
         public string ID_NUMBER { get; set; }

@@ -16,72 +16,70 @@ namespace LvDao.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        /// <summary>
-        /// 读取json配置文件
-        /// </summary>
-        private static IConfigurationRoot Configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .Build();
-        /// <summary>
-        /// 读取配置文件下的连接字符串
-        /// </summary>
-        string connectionString = Configuration.GetSection("ConnectionStrings").GetSection("BaseDbOracle").Value;
-
-        public SqlSugarClient GetInstance()
-        {
-            SqlSugarClient db = new SqlSugarClient(new ConnectionConfig()
-                {
-                    ConnectionString = connectionString,
-                    DbType = DbType.Oracle,//数据库类型
-                    IsAutoCloseConnection = true,
-                }
-                );
-            return db;
-        }
-
         [HttpGet]
-        public List<LD_USER> GetUserList()
+        public async Task<ActionResult<IEnumerable<LD_USER>>> GetUser()
         {
-            var db = GetInstance();
-            var list = db.Queryable<LD_USER>().ToList();
-            return list;
+            SqlSugar c = new();
+            var db = c.GetInstance();
+            return await db.Queryable<LD_USER>().ToListAsync();
         }
-
-        /*
+       
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(string id)
+        public async Task<ActionResult<IEnumerable<LD_USER>>> GetUser(string id)
         {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
+            SqlSugar c = new();
+            var db = c.GetInstance();
+            var res = await db.Queryable<LD_USER>().Where(it => it.USER_ID == id).ToListAsync();
+            if(res==null)
             {
                 return NotFound();
             }
-
-            return user;
+            return res;
         }
 
-        // PUT: api/Users/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(string id, User user)
+        //POST: api/Users
+        [HttpPost]
+        public async Task<ActionResult<LD_USER>> PostUser(LD_USER user)
         {
-            if (id != user.UserID)
+            SqlSugar c = new();
+            var db = c.GetInstance();
+            try
+            {
+                await Task.Run(()=>db.Insertable(user).ExecuteCommand());
+            }
+            catch(Exception)
+            {
+                if(db.Queryable<LD_USER>().Where(it => it.USER_ID == user.USER_ID).Any())
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }     
+            return CreatedAtAction(nameof(GetUser), new { id = user.USER_ID }, user);
+        }
+
+        
+        // PUT: api/Users/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUser(string id, LD_USER user)
+        {
+            if(id != user.USER_ID)
             {
                 return BadRequest();
             }
-
-            _context.Entry(user).State = EntityState.Modified;
-
+            SqlSugar c = new();
+            var db = c.GetInstance();
             try
             {
-                await _context.SaveChangesAsync();
+                var result =await Task.Run(()=>db.Updateable(user).ExecuteCommand());
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!UserExists(id))
+                if(!db.Queryable<LD_USER>().Where(it => it.USER_ID == id).Any())
                 {
                     return NotFound();
                 }
@@ -90,56 +88,22 @@ namespace LvDao.Controllers
                     throw;
                 }
             }
-
             return NoContent();
-        }
-
-        // POST: api/Users
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
-        {
-            _context.Users.Add(user);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (UserExists(user.UserID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            //return CreatedAtAction("GetUser", new { id = user.UserID }, user);
-            return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, user);
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(string id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            SqlSugar c = new();
+            var db = c.GetInstance();
+            var res = await db.Queryable<LD_USER>().Where(it => it.USER_ID == id).ToListAsync();
+            if(res == null)
             {
                 return NotFound();
             }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
+            await Task.Run(()=>db.Deleteable<LD_USER>().In(id).ExecuteCommand());
             return NoContent();
         }
-
-        private bool UserExists(string id)
-        {
-            return _context.Users.Any(e => e.UserID == id);
-        }
-        */
     }
 }
