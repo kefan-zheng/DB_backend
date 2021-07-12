@@ -9,50 +9,48 @@ using LvDao;
 using Microsoft.Extensions.Configuration;
 using SqlSugar;
 using System.IO;
-using Microsoft.AspNetCore.Cors;
 
 namespace LvDao.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("any")]
-    public class UsersController : ControllerBase
+    public class HotelController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LD_USER>>> GetUser()
+        public async Task<ActionResult<IEnumerable<LD_HOTEL>>> GetHotel()
         {
             SqlSugar c = new();
             var db = c.GetInstance();
-            return await db.Queryable<LD_USER>().ToListAsync();
+            return await db.Queryable<LD_HOTEL>().ToListAsync();
         }
-       
-        // GET: api/Users
+
+        // GET: api/Hotel
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<LD_USER>>> GetUser(string id)
+        public async Task<ActionResult<IEnumerable<LD_HOTEL>>> GetHotel(string id)
         {
             SqlSugar c = new();
             var db = c.GetInstance();
-            var res = await db.Queryable<LD_USER>().Where(it => it.USER_ID == id).ToListAsync();
-            if(res==null)
+            var res = await db.Queryable<LD_HOTEL>().Where(it => it.HOTEL_ID == id).ToListAsync();
+            if (res == null)
             {
                 return NotFound();
             }
             return res;
         }
 
-        //POST: api/Users
+        //POST: api/Hotel
         [HttpPost]
-        public async Task<ActionResult<LD_USER>> PostUser(LD_USER user)
+        public async Task<ActionResult<LD_HOTEL>> PostHotel(LD_HOTEL hotel)
         {
             SqlSugar c = new();
             var db = c.GetInstance();
             try
             {
-                await Task.Run(()=>db.Insertable(user).ExecuteCommand());
+                await Task.Run(() => db.Insertable(hotel).ExecuteCommand());
             }
-            catch(Exception)
+            catch (Exception)
             {
-                if(db.Queryable<LD_USER>().Where(it => it.USER_ID == user.USER_ID).Any())
+                if (db.Queryable<LD_HOTEL>().Where(it => it.HOTEL_ID == hotel.HOTEL_ID).Any())
                 {
                     return Conflict();
                 }
@@ -60,16 +58,16 @@ namespace LvDao.Controllers
                 {
                     throw;
                 }
-            }     
-            return CreatedAtAction(nameof(GetUser), new { id = user.USER_ID }, user);
+            }
+            return CreatedAtAction(nameof(GetHotel), new { id = hotel.HOTEL_ID }, hotel);
         }
 
-        
-        // PUT: api/Users
+
+        // PUT: api/Hotel
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(string id, LD_USER user)
+        public async Task<IActionResult> PutHotel(string id, LD_HOTEL hotel)
         {
-            if(id != user.USER_ID)
+            if (id != hotel.HOTEL_ID)
             {
                 return BadRequest();
             }
@@ -77,11 +75,11 @@ namespace LvDao.Controllers
             var db = c.GetInstance();
             try
             {
-                var result =await Task.Run(()=>db.Updateable(user).ExecuteCommand());
+                var result = await Task.Run(() => db.Updateable(hotel).ExecuteCommand());
             }
             catch (Exception)
             {
-                if(!db.Queryable<LD_USER>().Where(it => it.USER_ID == id).Any())
+                if (!db.Queryable<LD_HOTEL>().Where(it => it.HOTEL_ID == id).Any())
                 {
                     return NotFound();
                 }
@@ -93,18 +91,18 @@ namespace LvDao.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Users
+        // DELETE: api/Hotel
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(string id)
+        public async Task<IActionResult> DeleteHotel(string id)
         {
             SqlSugar c = new();
             var db = c.GetInstance();
-            var res = await db.Queryable<LD_USER>().Where(it => it.USER_ID == id).ToListAsync();
-            if(res == null)
+            var res = await db.Queryable<LD_HOTEL>().Where(it => it.HOTEL_ID == id).ToListAsync();
+            if (res == null)
             {
                 return NotFound();
             }
-            await Task.Run(()=>db.Deleteable<LD_USER>().In(id).ExecuteCommand());
+            await Task.Run(() => db.Deleteable<LD_HOTEL>().In(id).ExecuteCommand());
             return NoContent();
         }
     }

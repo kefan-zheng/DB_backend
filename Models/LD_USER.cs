@@ -10,13 +10,13 @@ namespace LvDao.Models
     {
         [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public string USER_ID { get; set; }
-        public string USER_Name { get; set; }
+        public string USER_NAME { get; set; }
         public string ID_NUMBER { get; set; }
         public string TELE_NUMBER { get; set; }
         public string MAILBOX_ID { get; set; }
         public string UPROFILE { get; set; }
         public string UPASSWORD { get; set; }
-        public string GENDER { get; set; }
+        public char GENDER { get; set; }
         public string ULOCATION { get; set; }
     }
 }

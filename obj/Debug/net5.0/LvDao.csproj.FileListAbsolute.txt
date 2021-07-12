@@ -150,3 +150,13 @@ C:\Users\20973\Desktop\LvDao\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.0\Sys
 C:\Users\20973\Desktop\LvDao\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.0\System.DirectoryServices.dll
 C:\Users\20973\Desktop\LvDao\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.0\System.DirectoryServices.Protocols.dll
 C:\Users\20973\Desktop\LvDao\obj\Debug\net5.0\LvDao.csproj.AssemblyReference.cache
+C:\Users\20973\Desktop\LvDao.beta\obj\Debug\net5.0\LvDao.csproj.AssemblyReference.cache
+C:\Users\20973\Desktop\LvDao.beta\obj\Debug\net5.0\LvDao.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\20973\Desktop\LvDao.beta\obj\Debug\net5.0\LvDao.AssemblyInfoInputs.cache
+C:\Users\20973\Desktop\LvDao.beta\obj\Debug\net5.0\LvDao.AssemblyInfo.cs
+C:\Users\20973\Desktop\LvDao.beta\obj\Debug\net5.0\LvDao.csproj.CoreCompileInputs.cache
+C:\Users\20973\Desktop\LvDao.beta\obj\Debug\net5.0\LvDao.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\20973\Desktop\LvDao.beta\obj\Debug\net5.0\LvDao.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\20973\Desktop\LvDao.beta\obj\Debug\net5.0\LvDao.dll
+C:\Users\20973\Desktop\LvDao.beta\obj\Debug\net5.0\ref\LvDao.dll
+C:\Users\20973\Desktop\LvDao.beta\obj\Debug\net5.0\LvDao.pdb
