@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using LvDao;
 using LvDao.Models;
 using SqlSugar;
+using Microsoft.AspNetCore.Cors;
 
 namespace LvDao.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("any")]
     public class UpdateFaqsController : ControllerBase
     {
         [HttpGet]

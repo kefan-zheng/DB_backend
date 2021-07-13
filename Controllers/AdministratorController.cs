@@ -9,12 +9,14 @@ using LvDao;
 using Microsoft.Extensions.Configuration;
 using SqlSugar;
 using System.IO;
+using Microsoft.AspNetCore.Cors;
 
 
 namespace LvDao.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("any")]
     public class AdministratorController : ControllerBase
     {
         [HttpGet]
