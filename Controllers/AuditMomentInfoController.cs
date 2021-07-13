@@ -75,7 +75,7 @@ namespace LvDao.Controllers
             string[] para = mid_aid.Split(new char[] { '&' });
             string mid = para[0];
             string aid = para[1];
-            if (mid != auditmomentinfo.MOMENT_ID && aid!= auditmomentinfo.ADMINISTRATOR_ID)
+            if (mid != auditmomentinfo.MOMENT_ID || aid!= auditmomentinfo.ADMINISTRATOR_ID)
             {
                 return BadRequest();
             }

@@ -73,7 +73,7 @@ namespace LvDao.Controllers
             string[] para = Qid_Aid.Split(new char[] { '&' });
             string qid = para[0];
             string aid = para[1];
-            if (qid != updatefaqs.QUESTION_ID&&aid!= updatefaqs.ADMINISTRATOR_ID)
+            if (qid != updatefaqs.QUESTION_ID || aid!= updatefaqs.ADMINISTRATOR_ID)
             {
                 return BadRequest();
             }

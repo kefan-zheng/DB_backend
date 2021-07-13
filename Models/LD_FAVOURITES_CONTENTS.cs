@@ -11,5 +11,6 @@ namespace LvDao.Models
         [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public string FAVOR_ID { get; set;}
         public string MERCHANT_LINK { get; set; }
+        public string LINK_ID { get; set; }
     }
 }
