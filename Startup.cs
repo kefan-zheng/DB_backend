@@ -37,9 +37,9 @@ namespace LvDao
                     builder
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials()//指定处理cookie
-                    .SetIsOriginAllowed(hostname => true);
+                    .AllowAnyHeader();
+                    //.AllowCredentials()//指定处理cookie
+                    //.SetIsOriginAllowed(hostname => true);
                     //.WithExposedHeaders("Access-Control-Allow-Origin");
                     //.AllowAnyOrigin() //允许任何来源的主机访问
                 });
@@ -53,8 +53,6 @@ namespace LvDao
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LvDao v1"));
             }
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -65,10 +63,10 @@ namespace LvDao
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            
+            app.UseAuthorization();
 
             app.UseCors("any");
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
