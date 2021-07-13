@@ -29,17 +29,22 @@ namespace LvDao
         {
             services.AddControllers();
             services.AddSwaggerGen();
-            //添加cors 服务 配置跨域处理            
+            //添加cors 服务 配置跨域处理         
             services.AddCors(options =>
             {
                 options.AddPolicy("any", builder =>
                 {
-                    builder.AllowAnyOrigin() //允许任何来源的主机访问
+                    builder
+                    .AllowAnyOrigin()
                     .AllowAnyMethod()
-                    .AllowAnyHeader();
-                    // .AllowCredentials();//指定处理cookie
+                    .AllowAnyHeader()
+                    .AllowCredentials()//指定处理cookie
+                    .SetIsOriginAllowed(hostname => true);
+                    //.WithExposedHeaders("Access-Control-Allow-Origin");
+                    //.AllowAnyOrigin() //允许任何来源的主机访问
                 });
             });
+    
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +66,7 @@ namespace LvDao
 
             app.UseRouting();
 
-            app.UseCors();
+            app.UseCors("any");
 
             app.UseAuthorization();
 
@@ -69,6 +74,7 @@ namespace LvDao
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

@@ -15,6 +15,7 @@ namespace LvDao.Models
         public string PICTURE { get; set; }
         public string OPEN_TIME { get; set; }
         public string CLOSE_TIME { get; set; }
+        public int STAR { get; set; }
         public int PRICE { get; set; }
     }
 }
