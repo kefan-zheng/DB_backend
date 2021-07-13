@@ -69,7 +69,7 @@ namespace LvDao.Controllers
             string[] para = uid_mid.Split(new char[] { '&' });
             string u_id = para[0];
             string m_id = para[1];
-            if (m_id != comment_moment.MOMENT_ID)
+            if (m_id != comment_moment.MOMENT_ID || u_id != comment_moment.USER_ID)
             {
                 return BadRequest();
             }

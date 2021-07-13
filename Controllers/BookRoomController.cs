@@ -27,14 +27,16 @@ namespace LvDao.Controllers
         }
 
         // GET: api/BookRoom
-        [HttpGet("{hotid_romid}")]
-        public async Task<ActionResult<IEnumerable<LD_BOOK_ROOM>>> GetBookRoom(string hotid_romid)
+        [HttpGet("{hoteid_roomid}")]
+        public async Task<ActionResult<IEnumerable<LD_BOOK_ROOM>>> GetBookRoom(string hoteid_roomid)
         {
             //处理字符串
-            string[] para = hotid_romid.Split(new char[] { '&' });
+            string[] para = hoteid_roomid.Split(new char[] { '&' });
+            string hoteid = para[0];
+            string roomid = para[1];
             SqlSugar c = new();
             var db = c.GetInstance();
-            var res = await db.Queryable<LD_BOOK_ROOM>().Where(it => it.HOTEL_ID == para[0]&&it.ROOM_ID == para[1]).ToListAsync();
+            var res = await db.Queryable<LD_BOOK_ROOM>().Where(it => it.HOTEL_ID == hoteid && it.ROOM_ID == roomid).ToListAsync();
             if (res == null)
             {
                 return NotFound();
@@ -68,12 +70,14 @@ namespace LvDao.Controllers
 
 
         // PUT: api/BookRoom
-        [HttpPut("{hotid_romid}")]
-        public async Task<IActionResult> PutBookRoom(string hotid_romid, LD_BOOK_ROOM bookroom)
+        [HttpPut("{hoteid_roomid}")]
+        public async Task<IActionResult> PutBookRoom(string hoteid_roomid, LD_BOOK_ROOM bookroom)
         {
             //处理字符串
-            string[] para = hotid_romid.Split(new char[] { '&' });
-            if (para[0] != bookroom.HOTEL_ID&&para[1] != bookroom.ROOM_ID)
+            string[] para = hoteid_roomid.Split(new char[] { '&' });
+            string hoteid = para[0];
+            string roomid = para[1];
+            if (para[0] != bookroom.HOTEL_ID || para[1] != bookroom.ROOM_ID)
             {
                 return BadRequest();
             }
@@ -85,7 +89,7 @@ namespace LvDao.Controllers
             }
             catch (Exception)
             {
-                if (!db.Queryable<LD_BOOK_ROOM>().Where(it => it.HOTEL_ID == para[0]&&it.ROOM_ID == para[1]).Any())
+                if (!db.Queryable<LD_BOOK_ROOM>().Where(it => it.HOTEL_ID == hoteid&&it.ROOM_ID == roomid).Any())
                 {
                     return NotFound();
                 }
@@ -98,19 +102,21 @@ namespace LvDao.Controllers
         }
 
         // DELETE: api/BookRoom
-        [HttpDelete("{hotid_romid}")]
-        public async Task<IActionResult> DeleteBookRoom(string hotid_romid)
+        [HttpDelete("{hoteid_roomid}")]
+        public async Task<IActionResult> DeleteBookRoom(string hoteid_roomid)
         {
             //处理字符串
-            string[] para = hotid_romid.Split(new char[] { '&' });
+            string[] para = hoteid_roomid.Split(new char[] { '&' });
+            string hoteid = para[0];
+            string roomid = para[1];
             SqlSugar c = new();
             var db = c.GetInstance();
-            var res = await db.Queryable<LD_BOOK_ROOM>().Where(it => it.HOTEL_ID == para[0]&&it.ROOM_ID == para[1]).ToListAsync();
+            var res = await db.Queryable<LD_BOOK_ROOM>().Where(it => it.HOTEL_ID == hoteid&&it.ROOM_ID == roomid).ToListAsync();
             if (res == null)
             {
                 return NotFound();
             }
-            await Task.Run(() => db.Deleteable<LD_BOOK_ROOM>().Where(it => it.HOTEL_ID == para[0]&&it.ROOM_ID == para[1]).ExecuteCommand());
+            await Task.Run(() => db.Deleteable<LD_BOOK_ROOM>().Where(it => it.HOTEL_ID == hoteid&&it.ROOM_ID == roomid).ExecuteCommand());
             return NoContent();
         }
     }

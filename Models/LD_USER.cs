@@ -18,5 +18,6 @@ namespace LvDao.Models
         public string UPASSWORD { get; set; }
         public string GENDER { get; set; }
         public string ULOCATION { get; set; }
+        public string MOTTO { get; set; }
     }
 }

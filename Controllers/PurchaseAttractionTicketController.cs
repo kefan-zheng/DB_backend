@@ -32,9 +32,11 @@ namespace LvDao.Controllers
         {
             //处理字符串
             string[] para = userid_attrid.Split(new char[] { '&' });
+            string userid = para[0];
+            string attrid = para[1];
             SqlSugar c = new();
             var db = c.GetInstance();
-            var res = await db.Queryable<LD_PURCHASE_ATTRACTION_TICKET>().Where(it => it.USER_ID == para[0]&&it.ATTRACTION_ID == para[1]).ToListAsync();
+            var res = await db.Queryable<LD_PURCHASE_ATTRACTION_TICKET>().Where(it => it.USER_ID == userid&&it.ATTRACTION_ID == attrid).ToListAsync();
             if (res == null)
             {
                 return NotFound();
@@ -73,7 +75,9 @@ namespace LvDao.Controllers
         {
             //处理字符串
             string[] para = userid_attrid.Split(new char[] { '&' });
-            if (para[0] != purchaseattractionticket.USER_ID&&para[1] != purchaseattractionticket.ATTRACTION_ID)
+            string userid = para[0];
+            string attrid = para[1];
+            if (userid != purchaseattractionticket.USER_ID || attrid != purchaseattractionticket.ATTRACTION_ID)
             {
                 return BadRequest();
             }
@@ -85,7 +89,7 @@ namespace LvDao.Controllers
             }
             catch (Exception)
             {
-                if (!db.Queryable<LD_PURCHASE_ATTRACTION_TICKET>().Where(it => it.USER_ID == para[0]&&it.ATTRACTION_ID == para[1]).Any())
+                if (!db.Queryable<LD_PURCHASE_ATTRACTION_TICKET>().Where(it => it.USER_ID == userid&&it.ATTRACTION_ID == attrid).Any())
                 {
                     return NotFound();
                 }
@@ -103,14 +107,16 @@ namespace LvDao.Controllers
         {
             //处理字符串
             string[] para = userid_attrid.Split(new char[] { '&' });
+            string userid = para[0];
+            string attrid = para[1];
             SqlSugar c = new();
             var db = c.GetInstance();
-            var res = await db.Queryable<LD_PURCHASE_ATTRACTION_TICKET>().Where(it => it.USER_ID == para[0]&&it.ATTRACTION_ID == para[1]).ToListAsync();
+            var res = await db.Queryable<LD_PURCHASE_ATTRACTION_TICKET>().Where(it => it.USER_ID == userid&&it.ATTRACTION_ID == attrid).ToListAsync();
             if (res == null)
             {
                 return NotFound();
             }
-            await Task.Run(() => db.Deleteable<LD_PURCHASE_ATTRACTION_TICKET>().Where(it => it.USER_ID == para[0]&&it.ATTRACTION_ID == para[1]).ExecuteCommand());
+            await Task.Run(() => db.Deleteable<LD_PURCHASE_ATTRACTION_TICKET>().Where(it => it.USER_ID == userid&&it.ATTRACTION_ID == attrid).ExecuteCommand());
             return NoContent();
         }
     }

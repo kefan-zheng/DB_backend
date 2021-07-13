@@ -14,5 +14,6 @@ namespace LvDao.Models
         public string HLOCATION { get; set; }
         public string PICTURE { get; set; }
         public int STAR{ get; set; }
+        public int LOWEST_PRICE { get; set; }
     }
 }

@@ -32,9 +32,11 @@ namespace LvDao.Controllers
         {
             //处理字符串
             string[] para = hoteid_roomid.Split(new char[] { '&' });
+            string hoteid = para[0];
+            string roomid = para[1];
             SqlSugar c = new();
             var db = c.GetInstance();
-            var res = await db.Queryable<LD_ROOM>().Where(it => it.HOTEL_ID == para[0]&&it.ROOM_ID == para[1]).ToListAsync();
+            var res = await db.Queryable<LD_ROOM>().Where(it => it.HOTEL_ID == hoteid&&it.ROOM_ID == roomid).ToListAsync();
             if (res == null)
             {
                 return NotFound();
@@ -73,7 +75,9 @@ namespace LvDao.Controllers
         {
             //处理字符串
             string[] para = hoteid_roomid.Split(new char[] { '&' });
-            if (para[0] != room.HOTEL_ID&&para[1] != room.ROOM_ID)
+            string hoteid = para[0];
+            string roomid = para[1];
+            if (hoteid != room.HOTEL_ID || roomid != room.ROOM_ID)
             {
                 return BadRequest();
             }
@@ -85,7 +89,7 @@ namespace LvDao.Controllers
             }
             catch (Exception)
             {
-                if (!db.Queryable<LD_ROOM>().Where(it => it.HOTEL_ID == para[0]&&it.ROOM_ID == para[1]).Any())
+                if (!db.Queryable<LD_ROOM>().Where(it => it.HOTEL_ID == hoteid&&it.ROOM_ID == roomid).Any())
                 {
                     return NotFound();
                 }
@@ -103,14 +107,16 @@ namespace LvDao.Controllers
         {
             //处理字符串
             string[] para = hoteid_roomid.Split(new char[] { '&' });
+            string hoteid = para[0];
+            string roomid = para[1];
             SqlSugar c = new();
             var db = c.GetInstance();
-            var res = await db.Queryable<LD_ROOM>().Where(it => it.HOTEL_ID == para[0]&&it.ROOM_ID == para[1]).ToListAsync();
+            var res = await db.Queryable<LD_ROOM>().Where(it => it.HOTEL_ID == hoteid&&it.ROOM_ID == roomid).ToListAsync();
             if (res == null)
             {
                 return NotFound();
             }
-            await Task.Run(() => db.Deleteable<LD_ROOM>().Where(it => it.HOTEL_ID == para[0]&&it.ROOM_ID == para[1]).ExecuteCommand());
+            await Task.Run(() => db.Deleteable<LD_ROOM>().Where(it => it.HOTEL_ID == hoteid&&it.ROOM_ID == roomid).ExecuteCommand());
             return NoContent();
         }
     }
