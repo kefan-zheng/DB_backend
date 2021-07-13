@@ -16,7 +16,7 @@ namespace LvDao.Models
         public string MAILBOX_ID { get; set; }
         public string UPROFILE { get; set; }
         public string UPASSWORD { get; set; }
-        public char GENDER { get; set; }
+        public string GENDER { get; set; }
         public string ULOCATION { get; set; }
     }
 }

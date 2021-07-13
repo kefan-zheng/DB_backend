@@ -12,7 +12,7 @@ namespace LvDao.Models
         public string HOTEL_ID { get; set; }
         public string ROOM_ID { get; set; }
         public string TYPE_ID { get; set; }
-        public char BOOK_STATUS { get; set; }
+        public string BOOK_STATUS { get; set; }
         public int PRICE { get; set; }
     }
 }
