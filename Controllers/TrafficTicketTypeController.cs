@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Cors;
 
 namespace LvDao.Controllers
 {
+    [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("any")]
     public class TrafficTicketTypeController : ControllerBase
     {
         [HttpGet]

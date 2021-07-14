@@ -14,10 +14,10 @@ using System.Collections;
 
 namespace LvDao.Controllers.fun
 {
+    [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("any")]
-    public class SeaVehByController
+    public class SeaVehByController:ControllerBase
     {
         [HttpGet("{tratype_start_end_seatype}")]
         public List<dynamic> SeaVehBy(string tratype_start_end_seatype)
@@ -32,18 +32,20 @@ namespace LvDao.Controllers.fun
             string seatype = para[3];
             List<dynamic> list = new List<dynamic>();
             var table = db.Queryable<LD_TRAFFIC_TICKET, LD_VEHICLE_INFO, LD_OFFER_TRAFFIC_SERVICE, LD_TRAFFIC_COMPANY>
-               ((tt, vi, ots, tc) => new JoinQueryInfos(
-                   JoinType.Inner, tt.VEHICLE_ID == vi.VEHICLE_ID,
-                   JoinType.Inner, tt.VEHICLE_ID == ots.VEHICLE_ID,
-                   JoinType.Inner, ots.COMPANY_ID == tc.COMPANY_ID))
-                   .Select((tt, vi, ots, tc) => new
+               ((tt, vi, ots, tc) => tt.VEHICLE_ID == vi.VEHICLE_ID && tt.VEHICLE_ID == ots.VEHICLE_ID && ots.COMPANY_ID == tc.COMPANY_ID)
+                   .Distinct().Select((tt, vi, ots, tc) => new
                    {
                        tt.SEAT_TYPE,
-                       vi,
-                       ots.TRAFFIC_TYPE
+                       vi.VEHICLE_ID,
+                       vi.START_LOCATION,
+                       vi.END_LOCATION,
+                       vi.START_TIME,
+                       vi.END_TIME,
+                       ots.TRAFFIC_TYPE,
+                       tc.COMPANY_NAME
                    }).MergeTable()
-                   .Where(it => it.SEAT_TYPE == seatype && it.vi.START_LOCATION == start
-                   && it.vi.END_LOCATION == end && it.TRAFFIC_TYPE == tratype).ToList();
+                   .Where(it => it.SEAT_TYPE == seatype && it.START_LOCATION == start
+                   && it.END_LOCATION == end && it.TRAFFIC_TYPE == tratype).ToList();
             for (int i = 0; i < table.Count; i++)
             {
                 list.Add(table[i]);

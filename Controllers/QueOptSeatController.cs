@@ -14,9 +14,9 @@ using System.Collections;
 
 namespace LvDao.Controllers.fun
 {
+    [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("any")]
     public class QueOptSeatController:ControllerBase
     {
         [HttpGet("{vehid_seatype}")]
@@ -30,15 +30,20 @@ namespace LvDao.Controllers.fun
             string seatype = para[1];
             List<dynamic> list = new List<dynamic>();
             var table = db.Queryable<LD_TRAFFIC_TICKET, LD_VEHICLE_INFO, LD_OFFER_TRAFFIC_SERVICE, LD_TRAFFIC_COMPANY>
-               ((tt,vi,ots,tc) => new JoinQueryInfos(
-                   JoinType.Inner, tt.VEHICLE_ID == vi.VEHICLE_ID,
-                   JoinType.Inner, tt.VEHICLE_ID == ots.VEHICLE_ID,
-                   JoinType.Inner, ots.COMPANY_ID == tc.COMPANY_ID))
+               ((tt,vi,ots,tc) =>  tt.VEHICLE_ID == vi.VEHICLE_ID && tt.VEHICLE_ID == ots.VEHICLE_ID && ots.COMPANY_ID == tc.COMPANY_ID)
                    .Select((tt,vi,ots,tc) => new
                    {
-                       tt,vi,tc.COMPANY_ID
+                       tt.SEAT_ID,
+                       tt.SEAT_TYPE,
+                       tt.PRICE,
+                       tt.VEHICLE_ID,
+                       vi.START_LOCATION,
+                       vi.END_LOCATION,
+                       vi.START_TIME,
+                       vi.END_TIME,
+                       tc.COMPANY_ID
                    }).MergeTable()
-                   .Where(it=>it.tt .VEHICLE_ID==vehid&&it.tt.SEAT_TYPE==seatype).ToList();
+                   .Where(it=>it.VEHICLE_ID==vehid&&it.SEAT_TYPE==seatype).ToList();
             for (int i = 0; i < table.Count; i++)
             {
                 list.Add(table[i]);

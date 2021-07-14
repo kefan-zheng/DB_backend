@@ -10,14 +10,16 @@ using Microsoft.Extensions.Configuration;
 using SqlSugar;
 using System.IO;
 using Microsoft.AspNetCore.Cors;
+using System.Collections;
 
 namespace LvDao.Controllers
 {
+    [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("any")]
     public class UsersController : ControllerBase
     {
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LD_USER>>> GetUser()
         {
@@ -25,7 +27,19 @@ namespace LvDao.Controllers
             var db = c.GetInstance();
             return await db.Queryable<LD_USER>().ToListAsync();
         }
-       
+        
+        /*
+        [HttpGet]
+        public List<dynamic> GetShit()
+        {
+            SqlSugar c = new();
+            var db = c.GetInstance();
+            List<dynamic> list = new List<dynamic>();
+            list.Add(db.Queryable<LD_USER, LD_PURCHASE_ATTRACTION_TICKET>((u, a) => new JoinQueryInfos(
+                 JoinType.Left, u.USER_ID == a.USER_ID)).Select((u, a) => new { id = u.USER_ID, name = u.USER_NAME }).ToList());
+            return list;
+        }*/
+
         // GET: api/Users
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<LD_USER>>> GetUser(string id)

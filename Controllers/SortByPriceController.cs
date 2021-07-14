@@ -14,9 +14,9 @@ using System.Collections;
 
 namespace LvDao.Controllers.fun
 {
+    [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("any")]
     public class SortByPriceController:ControllerBase
     {
         [HttpGet]

@@ -16,23 +16,23 @@ namespace LvDao.Controllers
     [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
-    public class MailController : ControllerBase
+    public class HasFavoritesController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LD_MAIL>>> GetMail()
+        public async Task<ActionResult<IEnumerable<LD_HAS_FAVORITES>>> GetHasFavorites()
         {
             SqlSugar c = new();
             var db = c.GetInstance();
-            return await db.Queryable<LD_MAIL>().ToListAsync();
+            return await db.Queryable<LD_HAS_FAVORITES>().ToListAsync();
         }
 
-        // GET: api/Mail
+        // GET: api/HasFavorites
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<LD_MAIL>>> GetMail(string id)
+        public async Task<ActionResult<IEnumerable<LD_HAS_FAVORITES>>> GetHasFavorites(string id)
         {
             SqlSugar c = new();
             var db = c.GetInstance();
-            var res = await db.Queryable<LD_MAIL>().Where(it => it.MAIL_ID == id).ToListAsync();
+            var res = await db.Queryable<LD_HAS_FAVORITES>().Where(it => it.FAVOR_ID == id).ToListAsync();
             if (res == null)
             {
                 return NotFound();
@@ -40,19 +40,19 @@ namespace LvDao.Controllers
             return res;
         }
 
-        //POST: api/Mail
+        //POST: api/HasFavorites
         [HttpPost]
-        public async Task<ActionResult<LD_MAIL>> PostMail(LD_MAIL mail)
+        public async Task<ActionResult<LD_HAS_FAVORITES>> PostUser(LD_HAS_FAVORITES hasfavorites)
         {
             SqlSugar c = new();
             var db = c.GetInstance();
             try
             {
-                await Task.Run(() => db.Insertable(mail).ExecuteCommand());
+                await Task.Run(() => db.Insertable(hasfavorites).ExecuteCommand());
             }
             catch (Exception)
             {
-                if (db.Queryable<LD_MAIL>().Where(it => it.MAIL_ID == mail.MAIL_ID).Any())
+                if (db.Queryable<LD_HAS_FAVORITES>().Where(it => it.FAVOR_ID == hasfavorites.FAVOR_ID).Any())
                 {
                     return Conflict();
                 }
@@ -61,15 +61,15 @@ namespace LvDao.Controllers
                     throw;
                 }
             }
-            return CreatedAtAction(nameof(GetMail), new { id = mail.MAIL_ID }, mail);
+            return CreatedAtAction(nameof(GetHasFavorites), new { id = hasfavorites.FAVOR_ID }, hasfavorites);
         }
 
 
-        // PUT: api/Mail
+        // PUT: api/HasFavorites
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMail(string id, LD_MAIL mail)
+        public async Task<IActionResult> PutHasFavorites(string id, LD_HAS_FAVORITES hasfavorites)
         {
-            if (id != mail.MAIL_ID)
+            if (id != hasfavorites.FAVOR_ID)
             {
                 return BadRequest();
             }
@@ -77,11 +77,11 @@ namespace LvDao.Controllers
             var db = c.GetInstance();
             try
             {
-                var result = await Task.Run(() => db.Updateable(mail).ExecuteCommand());
+                var result = await Task.Run(() => db.Updateable(hasfavorites).ExecuteCommand());
             }
             catch (Exception)
             {
-                if (!db.Queryable<LD_MAIL>().Where(it => it.MAIL_ID == id).Any())
+                if (!db.Queryable<LD_HAS_FAVORITES>().Where(it => it.FAVOR_ID == id).Any())
                 {
                     return NotFound();
                 }
@@ -93,18 +93,18 @@ namespace LvDao.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Mail
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMail(string id)
+        public async Task<IActionResult> DeleteHasFavorites(string id)
         {
             SqlSugar c = new();
             var db = c.GetInstance();
-            var res = await db.Queryable<LD_MAIL>().Where(it => it.MAIL_ID == id).ToListAsync();
+            var res = await db.Queryable<LD_HAS_FAVORITES>().Where(it => it.FAVOR_ID == id).ToListAsync();
             if (res == null)
             {
                 return NotFound();
             }
-            await Task.Run(() => db.Deleteable<LD_MAIL>().In(id).ExecuteCommand());
+            await Task.Run(() => db.Deleteable<LD_HAS_FAVORITES>().In(id).ExecuteCommand());
             return NoContent();
         }
     }

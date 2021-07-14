@@ -27,12 +27,10 @@ namespace LvDao
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddSwaggerGen();
             //添加cors 服务 配置跨域处理         
             services.AddCors(options =>
             {
-                options.AddPolicy("any", builder =>
+                options.AddPolicy(name:"any", builder =>
                 {
                     builder
                     .AllowAnyOrigin()
@@ -44,7 +42,8 @@ namespace LvDao
                     //.AllowAnyOrigin() //允许任何来源的主机访问
                 });
             });
-    
+            services.AddControllers();
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,14 +62,19 @@ namespace LvDao
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            
-            app.UseAuthorization();
 
             app.UseCors("any");
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                /*
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}").RequireCors("any");
+                */
             });
 
         }

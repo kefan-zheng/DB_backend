@@ -13,9 +13,9 @@ using Microsoft.AspNetCore.Cors;
 
 namespace LvDao.Controllers
 {
+    [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("any")]
     public class FavouriteContentsController : ControllerBase
     {
         [HttpGet]
@@ -27,15 +27,15 @@ namespace LvDao.Controllers
         }
 
         // GET: api/FavouriteContents
-        [HttpGet("{id_link}")]
-        public async Task<ActionResult<IEnumerable<LD_FAVOURITES_CONTENTS>>> GetFavouriteContents(string id_link)
+        [HttpGet("{fid_lid}")]
+        public async Task<ActionResult<IEnumerable<LD_FAVOURITES_CONTENTS>>> GetFavouriteContents(string fid_lid)
         {
             SqlSugar c = new();
             var db = c.GetInstance();
-            string[] para = id_link.Split(new char[] { '&' });
-            string id = para[0];
-            string link = para[1];
-            var res = await db.Queryable<LD_FAVOURITES_CONTENTS>().Where(it => it.FAVOR_ID == id && it.MERCHANT_LINK == link).ToListAsync();
+            string[] para = fid_lid.Split(new char[] { '&' });
+            string fid = para[0];
+            string lid = para[1];
+            var res = await db.Queryable<LD_FAVOURITES_CONTENTS>().Where(it => it.FAVOR_ID == fid && it.LINK_ID == lid).ToListAsync();
             if (res == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace LvDao.Controllers
             }
             catch (Exception)
             {
-                if (db.Queryable<LD_FAVOURITES_CONTENTS>().Where(it => it.FAVOR_ID == favouritecontents.FAVOR_ID && it.MERCHANT_LINK == favouritecontents.MERCHANT_LINK).Any())
+                if (db.Queryable<LD_FAVOURITES_CONTENTS>().Where(it => it.FAVOR_ID == favouritecontents.FAVOR_ID && it.LINK_ID == favouritecontents.MERCHANT_LINK).Any())
                 {
                     return Conflict();
                 }
@@ -64,18 +64,18 @@ namespace LvDao.Controllers
                     throw;
                 }
             }
-            return CreatedAtAction(nameof(GetFavouriteContents), new { id = favouritecontents.FAVOR_ID , link = favouritecontents.MERCHANT_LINK }, favouritecontents);
+            return CreatedAtAction(nameof(GetFavouriteContents), new { fid = favouritecontents.FAVOR_ID , lid = favouritecontents.LINK_ID }, favouritecontents);
         }
 
 
         // PUT: api/FavouriteContents
-        [HttpPut("{id_link}")]
-        public async Task<IActionResult> PutUser(string id_link, LD_FAVOURITES_CONTENTS favouritecontents)
+        [HttpPut("{fid_lid}")]
+        public async Task<IActionResult> PutUser(string fid_lid, LD_FAVOURITES_CONTENTS favouritecontents)
         {
-            string[] para = id_link.Split(new char[] { '&' });
-            string id = para[0];
-            string link = para[1];
-            if (id != favouritecontents.FAVOR_ID || link !=favouritecontents.MERCHANT_LINK)
+            string[] para = fid_lid.Split(new char[] { '&' });
+            string fid = para[0];
+            string lid = para[1];
+            if (fid != favouritecontents.FAVOR_ID || lid !=favouritecontents.LINK_ID)
             {
                 return BadRequest();
             }
@@ -87,7 +87,7 @@ namespace LvDao.Controllers
             }
             catch (Exception)
             {
-                if (!db.Queryable<LD_FAVOURITES_CONTENTS>().Where(it => it.FAVOR_ID == id && it.MERCHANT_LINK == link).Any())
+                if (!db.Queryable<LD_FAVOURITES_CONTENTS>().Where(it => it.FAVOR_ID == fid && it.LINK_ID == lid).Any())
                 {
                     return NotFound();
                 }
@@ -100,20 +100,20 @@ namespace LvDao.Controllers
         }
 
         // DELETE: api/FavouriteContents
-        [HttpDelete("{id_link}")]
-        public async Task<IActionResult> DeleteFavouriteContents(string id_link)
+        [HttpDelete("{fid_lid}")]
+        public async Task<IActionResult> DeleteFavouriteContents(string fid_lid)
         {
             SqlSugar c = new();
             var db = c.GetInstance();
-            string[] para = id_link.Split(new char[] { '&' });
-            string id = para[0];
-            string link = para[1];
-            var res = await db.Queryable<LD_FAVOURITES_CONTENTS>().Where(it => it.FAVOR_ID == id && it.MERCHANT_LINK == link).ToListAsync();
+            string[] para = fid_lid.Split(new char[] { '&' });
+            string fid = para[0];
+            string lid = para[1];
+            var res = await db.Queryable<LD_FAVOURITES_CONTENTS>().Where(it => it.FAVOR_ID == fid && it.LINK_ID == lid).ToListAsync();
             if (res == null)
             {
                 return NotFound();
             }
-            await Task.Run(() => db.Deleteable<LD_FAVOURITES_CONTENTS>().Where(it => it.FAVOR_ID == id && it.MERCHANT_LINK == link).ExecuteCommand());
+            await Task.Run(() => db.Deleteable<LD_FAVOURITES_CONTENTS>().Where(it => it.FAVOR_ID == fid && it.LINK_ID == lid).ExecuteCommand());
             return NoContent();
         }
     }
