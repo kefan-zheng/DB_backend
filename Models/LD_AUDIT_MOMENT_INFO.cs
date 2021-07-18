@@ -10,6 +10,7 @@ namespace LvDao.Models
     {
         [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public string MOMENT_ID { get; set; }
+        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public string ADMINISTRATOR_ID { get; set; }
         public string MOMENT_AUDIT_RESULT { get; set; }
     }

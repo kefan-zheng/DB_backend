@@ -11,6 +11,6 @@ namespace LvDao.Models
         [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public string TYPE_ID { get; set; }
         public string TYPE_NAME { get; set; }
-        public int AREA { get; set; }
+        public int PRICE { get; set; }
     }
 }

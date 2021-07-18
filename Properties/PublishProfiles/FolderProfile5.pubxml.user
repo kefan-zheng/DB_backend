@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\同济曹峰源\Desktop\dotnetcore</_PublishTargetUrl>
+    <History>True|2021-07-14T16:43:05.7021114Z;</History>
+  </PropertyGroup>
+</Project>

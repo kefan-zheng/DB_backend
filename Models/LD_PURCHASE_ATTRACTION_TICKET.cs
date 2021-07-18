@@ -10,6 +10,7 @@ namespace LvDao.Models
     {
         [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public string USER_ID { get; set; }
+        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public string ATTRACTION_ID { get; set; }
         public string ORDER_TIME { get; set; }
         public int PRICE { get; set; }

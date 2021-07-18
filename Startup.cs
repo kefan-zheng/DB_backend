@@ -12,6 +12,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LvDao.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using LvDao.Tools;
 
 namespace LvDao
 {
@@ -24,7 +28,6 @@ namespace LvDao
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             //添加cors 服务 配置跨域处理         
@@ -36,17 +39,32 @@ namespace LvDao
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
-                    //.AllowCredentials()//指定处理cookie
-                    //.SetIsOriginAllowed(hostname => true);
-                    //.WithExposedHeaders("Access-Control-Allow-Origin");
-                    //.AllowAnyOrigin() //允许任何来源的主机访问
                 });
             });
             services.AddControllers();
             services.AddSwaggerGen();
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,//是否调用对签名securityToken的SecurityKey进行验证
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(TokenParameter.Secret)),//签名秘钥
+                    ValidateIssuer = true,//是否验证颁发者
+                    ValidIssuer = TokenParameter.Issuer, //颁发者
+                    ValidateAudience = true, //是否验证接收者
+                    ValidAudience = TokenParameter.Audience,//接收者
+                    ValidateLifetime = true,//是否验证失效时间
+                };
+            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -65,16 +83,14 @@ namespace LvDao
 
             app.UseCors("any");
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                /*
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}").RequireCors("any");
-                */
+                
             });
 
         }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\20973\\Desktop\\LvDao.beta\\LvDao.csproj": {}
+    "C:\\Users\\20973\\Desktop\\databasedesign\\LvDao7-15\\LvDao.beta\\LvDao.csproj": {}
   },
   "projects": {
-    "C:\\Users\\20973\\Desktop\\LvDao.beta\\LvDao.csproj": {
+    "C:\\Users\\20973\\Desktop\\databasedesign\\LvDao7-15\\LvDao.beta\\LvDao.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\20973\\Desktop\\LvDao.beta\\LvDao.csproj",
+        "projectUniqueName": "C:\\Users\\20973\\Desktop\\databasedesign\\LvDao7-15\\LvDao.beta\\LvDao.csproj",
         "projectName": "LvDao",
-        "projectPath": "C:\\Users\\20973\\Desktop\\LvDao.beta\\LvDao.csproj",
+        "projectPath": "C:\\Users\\20973\\Desktop\\databasedesign\\LvDao7-15\\LvDao.beta\\LvDao.csproj",
         "packagesPath": "C:\\Users\\20973\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\20973\\Desktop\\LvDao.beta\\obj\\",
+        "outputPath": "C:\\Users\\20973\\Desktop\\databasedesign\\LvDao7-15\\LvDao.beta\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -45,9 +45,17 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[5.0.8, )"
+            },
             "Microsoft.AspNetCore.Cors": {
               "target": "Package",
               "version": "[2.2.0, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.11.1, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
@@ -64,6 +72,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
+            },
+            "System.Collections": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             }
           },
           "imports": [
