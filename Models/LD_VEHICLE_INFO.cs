@@ -14,6 +14,8 @@ namespace LvDao.Models
         public string END_LOCATION { set; get; }
         public string START_TIME { set; get; }
         public string END_TIME { set; get; }
-
+        public string START_AIRPORT { set;get; }
+        public string END_AIRPORT { set; get; }
+        public string COMPANY_NAME { set; get; }
     }
 }

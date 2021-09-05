@@ -13,39 +13,20 @@ namespace LvDao.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class PicController : ControllerBase
+    public class HotelLicenseController : ControllerBase
     {
-        [HttpGet]
-        public string GetPic()
-        {
-            string id = "123456";
-
-            SqlSugar c = new();
-            var db = c.GetInstance();
-
-            var table = db.Queryable<LD_PIC>().Where(it => it.PIC_ID == id)
-                .ToList();
-
-            var pic1 = table[0];
-
-            string pic_str = "data:image/jpg;base64," + Convert.ToBase64String(pic1.PICTURE);
-
-            return pic_str;
-
-        }
-
         [HttpGet("{id}")]
         public string GetPic(string id)
         {
             SqlSugar c = new();
             var db = c.GetInstance();
 
-            var table = db.Queryable<LD_PIC>().Where(it => it.PIC_ID == id)
+            var table = db.Queryable<LD_HOTEL_LICENSE>().Where(it => it.HOTEL_ID == id)
                 .ToList();
 
             var pic1 = table[0];
 
-            string pic_str = "data:image/jpg;base64," + Convert.ToBase64String(pic1.PICTURE);
+            string pic_str = "data:image/jpg;base64," + Convert.ToBase64String(pic1.PIC);
 
             return pic_str;
 
@@ -67,16 +48,16 @@ namespace LvDao.Controllers
 
             stream.Read(byteArray, 0, pic_len);
 
-            LD_PIC pic_test = new LD_PIC();
-            pic_test.PICTURE = new byte[pic_len];
+            LD_HOTEL_LICENSE pic_test = new LD_HOTEL_LICENSE();
+            pic_test.PIC = new byte[pic_len];
             for (int i = 0; i < pic_len; i++)
             {
-                pic_test.PICTURE[i] = byteArray[i];
+                pic_test.PIC[i] = byteArray[i];
             }
 
             //pic_test.PIC = stream.Length;
 
-            pic_test.PIC_ID = id;
+            pic_test.HOTEL_ID = id;
 
             SqlSugar c = new();
             var db = c.GetInstance();
@@ -92,12 +73,12 @@ namespace LvDao.Controllers
         {
             SqlSugar c = new();
             var db = c.GetInstance();
-            var res = await db.Queryable<LD_PIC>().Where(it => it.PIC_ID == id).ToListAsync();
+            var res = await db.Queryable<LD_HOTEL_LICENSE>().Where(it => it.HOTEL_ID == id).ToListAsync();
             if (res == null)
             {
                 return NotFound();
             }
-            await Task.Run(() => db.Deleteable<LD_PIC>().In(id).ExecuteCommand());
+            await Task.Run(() => db.Deleteable<LD_HOTEL_LICENSE>().In(id).ExecuteCommand());
             return NoContent();
         }
     }
