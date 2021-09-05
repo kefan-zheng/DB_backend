@@ -16,5 +16,6 @@ namespace LvDao.Models
         public int STAR{ get; set; }
         public int LOWEST_PRICE { get; set; }
         public string HPASSWORD { get; set; }
+        public string LABEL { get; set; }
     }
 }
