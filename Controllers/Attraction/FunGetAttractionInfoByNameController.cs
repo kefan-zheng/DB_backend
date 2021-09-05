@@ -41,8 +41,8 @@ namespace LvDao.Controllers.Attraction
                 .GroupBy(it => new { it.ATTRACTION_ID, it.ATTRACTION_NAME, it.ALOCATION, it.PICTURE, it.OPEN_TIME,
                                      it.CLOSE_TIME, it.STAR, it.PRICE, it.LABEL })
                 .Select(it => new {
-                    attid = it.ATTRACTION_ID,
-                    attname = it.ATTRACTION_NAME,
+                    attractionid = it.ATTRACTION_ID,
+                    attractionname = it.ATTRACTION_NAME,
                     location = it.ALOCATION,
                     picture = it.PICTURE,
                     opentime = it.OPEN_TIME,

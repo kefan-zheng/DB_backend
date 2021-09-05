@@ -17,7 +17,7 @@ namespace LvDao.Controllers
     [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class FunGetCommentNumByHotelLocationController : ControllerBase
     {
         // GET: api/CityHotel
@@ -39,10 +39,11 @@ namespace LvDao.Controllers
                     h.PICTURE,
                     h.STAR,
                     h.LOWEST_PRICE,
+                    h.LABEL,
                     c.USER_ID
                 })
                 .MergeTable()
-                .GroupBy(it => new { it.HOTEL_ID, it.HOTEL_NAME, it.HLOCATION, it.PICTURE, it.STAR, it.LOWEST_PRICE })
+                .GroupBy(it => new { it.HOTEL_ID, it.HOTEL_NAME, it.HLOCATION, it.PICTURE, it.STAR, it.LOWEST_PRICE, it.LABEL })
                 .Select(it => new {
                     hoteid = it.HOTEL_ID,
                     hotelname = it.HOTEL_NAME,
@@ -50,6 +51,7 @@ namespace LvDao.Controllers
                     picture = it.PICTURE,
                     star = it.STAR,
                     lowestprice = it.LOWEST_PRICE,
+                    label = it.LABEL,
                     commentnum = SqlFunc.AggregateCount(it.USER_ID)
                 })
                 .ToList();
@@ -70,11 +72,12 @@ namespace LvDao.Controllers
                     h.PICTURE,
                     h.STAR,
                     h.LOWEST_PRICE,
+                    h.LABEL,
                     c.USER_ID
                 })
                 .MergeTable()
                 .Where(it => it.HLOCATION.Contains(city))
-                .GroupBy(it => new { it.HOTEL_ID, it.HOTEL_NAME, it.HLOCATION, it.PICTURE, it.STAR, it.LOWEST_PRICE })
+                .GroupBy(it => new { it.HOTEL_ID, it.HOTEL_NAME, it.HLOCATION, it.PICTURE, it.STAR, it.LOWEST_PRICE, it.LABEL })
                 .Select(it => new {
                     hoteid = it.HOTEL_ID,
                     hotelname = it.HOTEL_NAME,
@@ -82,6 +85,7 @@ namespace LvDao.Controllers
                     picture = it.PICTURE,
                     star = it.STAR,
                     lowestprice = it.LOWEST_PRICE,
+                    label = it.LABEL,
                     commentnum = SqlFunc.AggregateCount(it.USER_ID)
                 })
                 .ToList();

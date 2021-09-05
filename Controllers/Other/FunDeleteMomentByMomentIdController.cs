@@ -13,7 +13,7 @@ namespace LvDao.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("any")]
-    [Authorize]
+    //[Authorize]
     public class FunDeleteMomentByMomentIdController : ControllerBase
     {
         // DELETE: api/TodoItems/5

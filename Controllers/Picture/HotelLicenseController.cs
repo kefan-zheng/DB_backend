@@ -34,7 +34,7 @@ namespace LvDao.Controllers
 
         //POST: api/
         [HttpPost("{id}")]
-        public async Task<ActionResult<LD_PIC_TEST>> PostPic(string id)
+        public async Task<ActionResult<LD_HOTEL_LICENSE>> PostPic(string id)
         {
             var stream = Request.Form.Files[0].OpenReadStream();
 

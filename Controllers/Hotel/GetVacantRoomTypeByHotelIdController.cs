@@ -13,7 +13,7 @@ namespace LvDao.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("any")]
-    [Authorize]
+    //[Authorize]
     public class FunGetVacantRoomTypeByHotelIdController : ControllerBase
     {
         [HttpGet("{id}")]

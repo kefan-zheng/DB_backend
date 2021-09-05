@@ -13,7 +13,7 @@ namespace LvDao.Controllers
     [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class FunMomentController : ControllerBase
     {
         [HttpGet("{momentId}")]

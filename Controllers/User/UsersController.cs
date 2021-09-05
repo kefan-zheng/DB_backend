@@ -18,9 +18,9 @@ namespace LvDao.Controllers
     [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class UsersController : ControllerBase
     {
-        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LD_USER>>> GetUser()
         {
@@ -65,7 +65,7 @@ namespace LvDao.Controllers
                     throw;
                 }
             }     
-            return CreatedAtAction(nameof(GetUser), new { id = user.USER_ID }, user);
+            return CreatedAtAction(nameof(PostUser), new { id = user.USER_ID }, user);
         }
 
         
@@ -110,6 +110,52 @@ namespace LvDao.Controllers
             }
             await Task.Run(()=>db.Deleteable<LD_USER>().In(id).ExecuteCommand());
             return NoContent();
+        }
+
+        //忘记密码
+        [HttpPatch("{id_vericode_newpwd}")]
+        public async Task<IActionResult> PatchUser(string id_vericode_newpwd)
+        {
+            //字符串分割
+            string[] para = id_vericode_newpwd.Split(new char[] { '&' });
+            string id = para[0];
+            string vericode = para[1];
+            string newpwd = para[2];
+            SqlSugar c = new();
+            var db = c.GetInstance();
+            try
+            {
+                if(vericode == EmailController.FinVeriCode)
+                {
+                    if (db.Queryable<LD_USER>().Where(it => it.USER_ID == id).Any())
+                    {
+                        var result = await Task.Run(() => db.Updateable<LD_USER>()
+                        .SetColumns(it => it.UPASSWORD == newpwd)
+                        .Where(it => it.USER_ID == id)
+                        .ExecuteCommand());
+                        return Ok("ok");
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+                else
+                {
+                    return NoContent();
+                }
+            }
+            catch (Exception)
+            {
+                if (!db.Queryable<LD_USER>().Where(it => it.USER_ID == id).Any())
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
     }
 }

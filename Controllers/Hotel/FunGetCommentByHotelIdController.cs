@@ -13,7 +13,7 @@ namespace LvDao.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("any")]
-    [Authorize]
+    //[Authorize]
     public class FunGetCommentByHotelIdController : ControllerBase
     {
         [HttpGet("{id}")]
@@ -24,6 +24,7 @@ namespace LvDao.Controllers
             var table = db.Queryable<LD_HOTEL, LD_USER, LD_COMMENT_ON_HOTELS>(
                 (h, u, c) => h.HOTEL_ID == c.HOTEL_ID && c.USER_ID == u.USER_ID)
                  .Select((h, u, c) => new {
+                     u.USER_ID,
                      u.USER_NAME,
                      c.COMMENT_TIME,
                      c.GRADE,
@@ -35,6 +36,7 @@ namespace LvDao.Controllers
                      .Where(it => it.HOTEL_ID == id)
                      .Select(item => new
                      {
+                         item.USER_ID,
                          item.USER_NAME,
                          item.COMMENT_TIME,
                          item.GRADE,

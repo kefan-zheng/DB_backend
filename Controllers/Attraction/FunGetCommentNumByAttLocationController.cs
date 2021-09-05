@@ -17,7 +17,7 @@ namespace LvDao.Controllers
     [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class FunGetCommentNumByAttLocationController:ControllerBase
     {
         [HttpGet("{city}")]
@@ -40,10 +40,11 @@ namespace LvDao.Controllers
                             a.CLOSE_TIME,
                             a.PRICE,
                             a.STAR,
+                            a.LABEL,
                             c.USER_ID
                         })
                         .MergeTable()
-                        .GroupBy(it => new { it.ATTRACTION_ID, it.ATTRACTION_NAME, it.ALOCATION, it.PICTURE, it.OPEN_TIME, it.CLOSE_TIME, it.PRICE, it.STAR })
+                        .GroupBy(it => new { it.ATTRACTION_ID, it.ATTRACTION_NAME, it.ALOCATION, it.PICTURE, it.OPEN_TIME, it.CLOSE_TIME, it.PRICE, it.STAR, it.LABEL })
                         .Select(it => new {
                             attractionid = it.ATTRACTION_ID,
                             attractionname = it.ATTRACTION_NAME,
@@ -53,6 +54,7 @@ namespace LvDao.Controllers
                             closetime = it.CLOSE_TIME,
                             price = it.PRICE,
                             star = it.STAR,
+                            label = it.LABEL,
                             commentnum = SqlFunc.AggregateCount(it.USER_ID)
                         })
                         .ToList();
@@ -75,11 +77,12 @@ namespace LvDao.Controllers
                         a.CLOSE_TIME,
                         a.PRICE,
                         a.STAR,
+                        a.LABEL,
                         c.USER_ID
                     })
                     .MergeTable()
                     .Where(it=>it.ALOCATION.Contains(city))
-                    .GroupBy(it => new { it.ATTRACTION_ID, it.ATTRACTION_NAME, it.ALOCATION, it.PICTURE, it.OPEN_TIME, it.CLOSE_TIME, it.PRICE, it.STAR })
+                    .GroupBy(it => new { it.ATTRACTION_ID, it.ATTRACTION_NAME, it.ALOCATION, it.PICTURE, it.OPEN_TIME, it.CLOSE_TIME, it.PRICE, it.STAR, it.LABEL })
                     .Select(it => new {
                         attractionid = it.ATTRACTION_ID,
                         attractionname = it.ATTRACTION_NAME,
@@ -89,6 +92,7 @@ namespace LvDao.Controllers
                         closetime = it.CLOSE_TIME,
                         price = it.PRICE,
                         star = it.STAR,
+                        label = it.LABEL,
                         commentnum = SqlFunc.AggregateCount(it.USER_ID)
                     })
                     .ToList();

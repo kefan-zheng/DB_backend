@@ -14,7 +14,7 @@ namespace LvDao.Controllers
     [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class FindBookedRoom : ControllerBase
     {
         [HttpGet("{id}")]

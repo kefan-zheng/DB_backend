@@ -12,7 +12,7 @@ namespace LvDao.Models
         public string USER_ID { get; set; }
         [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public string ATTRACTION_ID { get; set; }
-        public string COMMENT_TIME { get; set; }
+        public string ACOMMENT_TIME { get; set; }
         public double GRADE { get; set; }
         public string CTEXT { get; set; }
         public string PICTURE { get; set; }
