@@ -16,13 +16,14 @@ namespace LvDao.Controllers
     //[Authorize]
     public class FunGetLowestFlightPriceController : ControllerBase
     {
-        [HttpGet("{fromWhere_toWhere}")]
-        public List<dynamic> GetMomentInfoById(string fromWhere_toWhere)
+        [HttpGet("{fromWhere_toWhere_date}")]
+        public List<dynamic> GetMomentInfoById(string fromWhere_toWhere_date)
         {
             //处理字符串
-            string[] para = fromWhere_toWhere.Split(new char[] { '&' });
+            string[] para = fromWhere_toWhere_date.Split(new char[] { '&' });
             string fromWhere = para[0];
             string toWhere = para[1];
+            string date = para[2];
 
             SqlSugar c = new();
             var db = c.GetInstance();
@@ -39,9 +40,10 @@ namespace LvDao.Controllers
                 v.START_LOCATION,
                 v.END_LOCATION,
                 t.REMAINING_NUM,
-                t.SEAT_TYPE})
+                t.SEAT_TYPE,
+                t.FLIGHT_DATE})
              .MergeTable()
-             .Where(it => it.START_LOCATION == fromWhere && it.END_LOCATION == toWhere)
+             .Where(it => it.START_LOCATION == fromWhere && it.END_LOCATION == toWhere && it.FLIGHT_DATE == date)
               .Select(it => new
               {
                   it.PRICE,

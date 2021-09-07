@@ -25,17 +25,36 @@ namespace LvDao.Controllers
                 (r, rt) =>  r.TYPE_ID == rt.TYPE_ID)
                  .Select(( r, rt) => new {
                      rt.TYPE_NAME,
+                     rt.TYPE_ID,
                      r.BOOK_STATUS,
-                     rt.PRICE,
+                     rt.ORIGINAL_PRICE,
                      r.HOTEL_ID,
-                     r.ROOM_ID
+                     r.ROOM_ID,
+                     rt.ROOM_NAME,
+                     rt.CUSTOMER_NUM,
+                     rt.BED,
+                     rt.DISH,
+                     rt.SMOKE,
+                     rt.WINDOW,
+                     rt.CANCEL,
+                     rt.PRICE,
+                     rt.COVER_IMG_URL
                  }).MergeTable()
                      .Where(it => it.BOOK_STATUS == "N" && it.HOTEL_ID==id )
                      .Select(item => new
                      {
                          item.TYPE_NAME,
+                         item.TYPE_ID,
+                         item.ORIGINAL_PRICE,
+                         item.ROOM_NAME,
+                         item.CUSTOMER_NUM,
+                         item.BED,
+                         item.DISH,
+                         item.SMOKE,
+                         item.WINDOW,
+                         item.CANCEL,
                          item.PRICE,
-                         item.ROOM_ID
+                         item.COVER_IMG_URL
                      })
                      .OrderBy(it => it.PRICE,OrderByType.Asc)
                      .Distinct()

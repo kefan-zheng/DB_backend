@@ -16,13 +16,14 @@ namespace LvDao.Controllers
     //[Authorize]
     public class FunGetFlightInfoController : ControllerBase
     {
-        [HttpGet("{fromWhere_toWhere}")]
-        public List<dynamic> GetFlightInfo(string fromWhere_toWhere)
+        [HttpGet("{fromWhere_toWhere_date}")]
+        public List<dynamic> GetFlightInfo(string fromWhere_toWhere_date)
         {
             //处理字符串
-            string[] para = fromWhere_toWhere.Split(new char[] { '&' });
+            string[] para = fromWhere_toWhere_date.Split(new char[] { '&' });
             string fromWhere = para[0];
             string toWhere = para[1];
+            string date = para[2];
 
             SqlSugar c = new();
             var db = c.GetInstance();
@@ -40,10 +41,11 @@ namespace LvDao.Controllers
                     v.END_TIME,
                     t.SEAT_TYPE,
                     t.PRICE,
-                    t.REMAINING_NUM
+                    t.REMAINING_NUM,
+                    t.FLIGHT_DATE
                 })
                 .MergeTable()
-                .Where(it => it.START_LOCATION == fromWhere && it.END_LOCATION == toWhere)
+                .Where(it => it.START_LOCATION == fromWhere && it.END_LOCATION == toWhere && it.FLIGHT_DATE == date)
                 .Select(it => new
                 {
                     it.VEHICLE_ID,

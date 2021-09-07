@@ -13,5 +13,9 @@ namespace LvDao.Models
         public int PLAN_ID { get; set; }
         public string PLAN { get; set; }
         public int PLAN_STAR { get; set; }
+        public string PLAN_TITLE { get; set; }
+        public string PLAN_DESC { get; set; }
+        public string PLAY_TIME { get; set; }
+        public string PUBL_TIME { get; set; }
     }
 }

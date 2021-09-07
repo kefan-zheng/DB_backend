@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\22109\Desktop\dotcore</_PublishTargetUrl>
+    <History>True|2021-09-07T08:07:10.2645279Z;True|2021-09-07T15:53:33.0402224+08:00;True|2021-09-07T13:56:07.3479881+08:00;True|2021-09-07T09:36:42.6941441+08:00;True|2021-09-06T18:47:07.6209879+08:00;True|2021-09-06T18:43:52.3293762+08:00;True|2021-09-06T11:39:43.8123039+08:00;True|2021-09-06T10:56:01.0196881+08:00;True|2021-09-06T10:13:54.1222141+08:00;True|2021-09-06T09:59:44.3293582+08:00;</History>
+  </PropertyGroup>
+</Project>

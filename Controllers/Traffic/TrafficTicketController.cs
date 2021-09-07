@@ -11,7 +11,7 @@ namespace LvDao.Controllers
     [EnableCors("any")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class TrafficTicketController : ControllerBase
     {
         [HttpGet]
@@ -23,15 +23,16 @@ namespace LvDao.Controllers
         }
 
         // GET: api/TrafficTicket/5
-        [HttpGet("{vehicleId_seatType}")]
-        public async Task<ActionResult<IEnumerable<LD_TRAFFIC_TICKET>>> GetTrafficTicket(string vehicleId_seatType)
+        [HttpGet("{vehicleId_seatType_date}")]
+        public async Task<ActionResult<IEnumerable<LD_TRAFFIC_TICKET>>> GetTrafficTicket(string vehicleId_seatType_date)
         {
             SqlSugar c = new();
             var db = c.GetInstance();
-            string[] para = vehicleId_seatType.Split(new char[] { '&' });
+            string[] para = vehicleId_seatType_date.Split(new char[] { '&' });
             string vehicle_id = para[0];
             string seat_type = para[1];
-            var res = await db.Queryable<LD_TRAFFIC_TICKET>().Where(it => it.SEAT_TYPE == seat_type && it.VEHICLE_ID == vehicle_id).ToListAsync();
+            string date = para[2];
+            var res = await db.Queryable<LD_TRAFFIC_TICKET>().Where(it => it.SEAT_TYPE == seat_type && it.VEHICLE_ID == vehicle_id && it.FLIGHT_DATE == date).ToListAsync();
             if (res == null)
             {
                 return NotFound();
@@ -51,7 +52,7 @@ namespace LvDao.Controllers
             }
             catch (Exception)
             {
-                if (db.Queryable<LD_TRAFFIC_TICKET>().Where(it => it.SEAT_TYPE == traffic_ticket.SEAT_TYPE && it.VEHICLE_ID==traffic_ticket.VEHICLE_ID ).Any())
+                if (db.Queryable<LD_TRAFFIC_TICKET>().Where(it => it.SEAT_TYPE == traffic_ticket.SEAT_TYPE && it.VEHICLE_ID==traffic_ticket.VEHICLE_ID && it.FLIGHT_DATE == traffic_ticket.FLIGHT_DATE).Any())
                 {
                     return Conflict();
                 }
@@ -60,7 +61,7 @@ namespace LvDao.Controllers
                     throw;
                 }
             }
-            return CreatedAtAction(nameof(GetTrafficTicket), new { seat_type = traffic_ticket.SEAT_TYPE,vehicle_id=traffic_ticket.VEHICLE_ID }, traffic_ticket);
+            return CreatedAtAction(nameof(GetTrafficTicket), new { seat_type = traffic_ticket.SEAT_TYPE,vehicle_id=traffic_ticket.VEHICLE_ID,flight_date = traffic_ticket.FLIGHT_DATE }, traffic_ticket);
         }
 
 
@@ -71,7 +72,8 @@ namespace LvDao.Controllers
             string[] para = vehicleId_seatId.Split(new char[] { '&' });
             string vehicle_id = para[0];
             string seat_type = para[1];
-            if (vehicle_id != traffic_ticket.VEHICLE_ID || seat_type!=traffic_ticket.SEAT_TYPE)
+            string date = para[2];
+            if (vehicle_id != traffic_ticket.VEHICLE_ID || seat_type!=traffic_ticket.SEAT_TYPE || date!=traffic_ticket.FLIGHT_DATE )
             {
                 return BadRequest();
             }
@@ -83,7 +85,7 @@ namespace LvDao.Controllers
             }
             catch (Exception)
             {
-                if (!db.Queryable<LD_TRAFFIC_TICKET>().Where(it => it.SEAT_TYPE == seat_type && it.VEHICLE_ID == vehicle_id).Any())
+                if (!db.Queryable<LD_TRAFFIC_TICKET>().Where(it => it.SEAT_TYPE == seat_type && it.VEHICLE_ID == vehicle_id && it.FLIGHT_DATE == date).Any())
                 {
                     return NotFound();
                 }
@@ -96,20 +98,21 @@ namespace LvDao.Controllers
         }
 
         // DELETE: api/TrafficTicket/5
-        [HttpDelete("{vehicleId_seatId}")]
-        public async Task<IActionResult> DeleteTrafficTicket(string vehicleId_seatId)
+        [HttpDelete("{vehicleId_seatId_date}")]
+        public async Task<IActionResult> DeleteTrafficTicket(string vehicleId_seatId_date)
         {
             SqlSugar c = new();
             var db = c.GetInstance();
-            string[] para = vehicleId_seatId.Split(new char[] { '&' });
+            string[] para = vehicleId_seatId_date.Split(new char[] { '&' });
             string vehicle_id = para[0];
             string seat_type = para[1];
-            var res = await db.Queryable<LD_TRAFFIC_TICKET>().Where(it => it.SEAT_TYPE == seat_type && it.VEHICLE_ID==vehicle_id).ToListAsync();
+            string date = para[2];
+            var res = await db.Queryable<LD_TRAFFIC_TICKET>().Where(it => it.SEAT_TYPE == seat_type && it.VEHICLE_ID==vehicle_id && it.FLIGHT_DATE ==date).ToListAsync();
             if (res == null)
             {
                 return NotFound();
             }
-            await Task.Run(() => db.Deleteable<LD_TRAFFIC_TICKET>().Where(it => it.SEAT_TYPE == seat_type && it.VEHICLE_ID == vehicle_id).ExecuteCommand());
+            await Task.Run(() => db.Deleteable<LD_TRAFFIC_TICKET>().Where(it => it.SEAT_TYPE == seat_type && it.VEHICLE_ID == vehicle_id && it.FLIGHT_DATE == date).ExecuteCommand());
             return NoContent();
         }
     }

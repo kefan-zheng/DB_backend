@@ -15,25 +15,6 @@ namespace LvDao.Controllers
     //[Authorize]
     public class PicController : ControllerBase
     {
-        [HttpGet]
-        public string GetPic()
-        {
-            string id = "123456";
-
-            SqlSugar c = new();
-            var db = c.GetInstance();
-
-            var table = db.Queryable<LD_PIC>().Where(it => it.PIC_ID == id)
-                .ToList();
-
-            var pic1 = table[0];
-
-            string pic_str = "data:image/jpg;base64," + Convert.ToBase64String(pic1.PICTURE);
-
-            return pic_str;
-
-        }
-
         [HttpGet("{id}")]
         public string GetPic(string id)
         {
@@ -42,6 +23,11 @@ namespace LvDao.Controllers
 
             var table = db.Queryable<LD_PIC>().Where(it => it.PIC_ID == id)
                 .ToList();
+
+            if (table.Count == 0)
+            {
+                return "NULL";
+            }
 
             var pic1 = table[0];
 

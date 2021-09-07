@@ -13,6 +13,9 @@ namespace LvDao.Models
 
         [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public string SEAT_TYPE { set; get; }
+
+        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
+        public string FLIGHT_DATE { set; get; }
         public int PRICE { set; get; }
         public int REMAINING_NUM{set;get;}
     }

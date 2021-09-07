@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.15.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
@@ -17,6 +18,7 @@
     <PackageReference Include="SqlSugarCore" Version="5.0.3.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
+    <PackageReference Include="TencentCloudSDK" Version="3.0.356" />
   </ItemGroup>
 
 </Project>

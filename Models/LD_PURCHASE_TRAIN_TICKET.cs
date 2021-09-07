@@ -17,5 +17,6 @@ namespace LvDao.Models
         public int ORDER_AMOUNT { set; get; }
         public string ORDER_TIME { set; get; }
         public string TELEPHONE { get; set; }
+        public string TRAIN_DATE { get; set; }
     }
 }

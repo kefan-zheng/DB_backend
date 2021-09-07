@@ -24,6 +24,11 @@ namespace LvDao.Controllers
             var table = db.Queryable<LD_HOTEL_LICENSE>().Where(it => it.HOTEL_ID == id)
                 .ToList();
 
+            if (table.Count == 0)
+            {
+                return "NULL";
+            }
+
             var pic1 = table[0];
 
             string pic_str = "data:image/jpg;base64," + Convert.ToBase64String(pic1.PIC);
