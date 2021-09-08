@@ -31,12 +31,15 @@ namespace LvDao.Controllers
 
 
         // GET: api/Plan
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<LD_PLAN>>> GetPlan(string id)
+        [HttpGet("{userid_planid}")]
+        public async Task<ActionResult<IEnumerable<LD_PLAN>>> GetPlan(string userid_planid)
         {
+            string[] para = userid_planid.Split(new char[] { '&' });
+            string userid = para[0];
+            string planid = para[1];
             SqlSugar c = new();
             var db = c.GetInstance();
-            var res = await db.Queryable<LD_PLAN>().Where(it => it.USER_ID == id).ToListAsync();
+            var res = await db.Queryable<LD_PLAN>().Where(it => it.USER_ID == userid && it.PLAN_ID == int.Parse(planid)).ToListAsync();
             if (res == null)
             {
                 return NotFound();

@@ -17,6 +17,10 @@ namespace LvDao.Models
         public int LOWEST_PRICE { get; set; }
         public string HPASSWORD { get; set; }
         public string LABEL { get; set; }
+        public string OPEN_TIME { get; set; }
+        public int TOTAL_NUM { get; set; }
+        public string TELEPHONE { get; set; }
+        public string DESCRIPTION { get; set; }
         public int IS_CHECK { get; set; }
     }
 }
