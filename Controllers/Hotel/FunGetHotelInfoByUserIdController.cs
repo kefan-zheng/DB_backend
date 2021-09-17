@@ -17,7 +17,7 @@ namespace LvDao.Controllers
     public class FunGetHotelInfoByUserIdController : ControllerBase
     {
         [HttpGet("{id}")]
-        public List<dynamic> FunGetAttractionInfoByUserId(string id)
+        public List<dynamic> GetHotelInfoByUserId(string id)
         {
             SqlSugar c = new();
             var db = c.GetInstance();

@@ -70,5 +70,36 @@ namespace LvDao.Controllers
             }
             return CreatedAtAction(nameof(PostPlan), new { userid = plan.USER_ID,planid = plan.PLAN_ID }, plan);
         }
+
+        // PUT: api/Mail
+        [HttpPut("{userid_planid}")]
+        public async Task<IActionResult> PutPlan(string userid_planid, LD_PLAN plan)
+        {
+            string[] para = userid_planid.Split(new char[] { '&' });
+            string userid = para[0];
+            string planid = para[1];
+            if (userid != plan.USER_ID || int.Parse(planid) != plan.PLAN_ID)
+            {
+                return BadRequest();
+            }
+            SqlSugar c = new();
+            var db = c.GetInstance();
+            try
+            {
+                var result = await Task.Run(() => db.Updateable(plan).ExecuteCommand());
+            }
+            catch (Exception)
+            {
+                if (!db.Queryable<LD_PLAN>().Where(it => it.USER_ID == userid && it.PLAN_ID == int.Parse(planid)).Any())
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return NoContent();
+        }
     }
 }
